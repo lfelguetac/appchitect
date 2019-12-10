@@ -1,0 +1,53 @@
+# este recurso requiere adaptaciones
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: estafetas-front
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: estafetas-front-pod
+  template:
+    metadata:
+      labels:
+        app: estafetas-front-pod
+    spec:
+      containers:
+      - name: estafetas-front-container
+        image: stelios.trebolit.local:8089/nexus/repository/trebol-develop/estafetas-front
+        imagePullPolicy: Always
+      imagePullSecrets:
+      - name: regcred
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: estafetas-front
+spec:
+  selector:
+    app: estafetas-front-pod
+  ports:
+  - port: 80
+    targetPort: 80
+    protocol: TCP
+    name: http
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+  name: estafetas-front
+spec:
+  rules:
+  - host: stelios.trebolit.local
+    http:
+      paths:
+      - backend:
+          serviceName: estafetas-front
+          servicePort: 80
+        path: /estafetas-front/?(.*)

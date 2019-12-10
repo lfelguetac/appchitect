@@ -1,0 +1,10 @@
+{
+    "type": "oracle",
+    "host": "10.10.241.59",
+    "port": 1521,
+    "username": "sgt",
+    "password": "SGT",
+    "database": "trebolfscert",
+    "connectString" : "(DESCRIPTION =(ADDRESS = (PROTOCOL=TCP)(HOST=10.10.241.59)(PORT=1521))(CONNECT_DATA =(SID=trebolfscert)))",
+    "entities": ["dist/server/api/parametros/*/model.js"]
+}

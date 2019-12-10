@@ -1,0 +1,132 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Servicio de parametricas",
+    "description": "Este servicio provee parametricas del sistema general de tablas. Para mas info del contenido de este servicio ver mas abajo.",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "moneda",
+      "description": ""
+    }
+  ],
+  "paths": {
+    "/moneda": {
+      "get": {
+        "tags": [
+          "moneda"
+        ],
+        "summary": "Recupera un listado de monedas",
+        "operationId": "getMonedas",
+        "responses": {
+          "400": {
+            "description": "Bad request",
+            "content": {}
+          },
+          "404": {
+            "description": "Moneda not found",
+            "content": {}
+          },
+          "405": {
+            "description": "Validation exception",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "petstore_auth": [
+              "write:pets",
+              "read:pets"
+            ]
+          }
+        ],
+        "x-codegen-request-body-name": "body"
+      }
+    },
+  "/moneda/{monedaId}": {
+    "get": {
+      "tags": [
+        "moneda"
+      ],
+      "summary": "Obtiene una moneda especifica",
+      "operationId": "getMonedaById",
+      "parameters": [
+        {
+          "name": "monedaId",
+          "in": "path",
+          "description": "Identificador de la moneda",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "successful operation",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/moneda"
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "Invalid moneda supplied",
+          "content": {}
+        },
+        "404": {
+          "description": "Moneda not found",
+          "content": {}
+        }
+      }
+    }
+  }
+  },
+  "components": {
+    "schemas": {
+      "moneda": {
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "type": "integer",
+            "example": 357
+          },
+          "descripcion": {
+            "type": "string",
+            "example": "Peso"
+          },
+          "sombolo": {
+            "type": "string",
+            "example": "$"
+          },
+          "decimales": {
+            "type": "integer",
+            "example": 0
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "petstore_auth": {
+        "type": "oauth2",
+        "flows": {
+          "implicit": {
+            "authorizationUrl": "http://petstore.swagger.io/oauth/dialog",
+            "scopes": {
+              "write:pets": "modify pets in your account",
+              "read:pets": "read your pets"
+            }
+          }
+        }
+      },
+      "api_key": {
+        "type": "apiKey",
+        "name": "api_key",
+        "in": "header"
+      }
+    }
+  }
+}

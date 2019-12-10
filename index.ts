@@ -1,0 +1,1 @@
+import("./server").then( app => app.Run() );
