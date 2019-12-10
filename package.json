@@ -11,7 +11,7 @@
   },
   "private": true,
   "author": "LFE",
-  "license": "ISC",
+  "license": "UNLICENSED",
   "dependencies": {
     "@types/express": "^4.17.2",
     "@types/helmet": "0.0.45",
