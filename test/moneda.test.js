@@ -4,7 +4,6 @@ const request = require("request-promise-native");
 
 const API_PATH = process.env.DOMAIN_PATH + process.env.BASE_PATH;
 
-
 describe("probamos recurso moneda", () => {
     
     let parametroMonedaId = 0;

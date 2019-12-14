@@ -1,1 +1,1 @@
-import("./server").then( app => app.Run() );
+import("./src/infrastructure").then( app => app.Run() );

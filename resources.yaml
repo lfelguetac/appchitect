@@ -3,20 +3,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: estafetas-front
+  name: ms-parametricas
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: estafetas-front-pod
+      app: ms-parametricas-pod
   template:
     metadata:
       labels:
-        app: estafetas-front-pod
+        app: ms-parametricas-pod
     spec:
       containers:
-      - name: estafetas-front-container
-        image: stelios.trebolit.local:8089/nexus/repository/trebol-develop/estafetas-front
+      - name: ms-parametricas-container
+        image: stelios.trebolit.local:8089/nexus/repository/trebol-develop/ms-parametricas
         imagePullPolicy: Always
       imagePullSecrets:
       - name: regcred
@@ -24,10 +24,10 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-  name: estafetas-front
+  name: ms-parametricas
 spec:
   selector:
-    app: estafetas-front-pod
+    app: ms-parametricas-pod
   ports:
   - port: 80
     targetPort: 80
@@ -41,13 +41,13 @@ metadata:
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
     nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
     nginx.ingress.kubernetes.io/rewrite-target: /$1
-  name: estafetas-front
+  name: ms-parametricas
 spec:
   rules:
   - host: stelios.trebolit.local
     http:
       paths:
       - backend:
-          serviceName: estafetas-front
+          serviceName: ms-parametricas
           servicePort: 80
-        path: /estafetas-front/?(.*)
+        path: /ms-parametricas/?(.*)
