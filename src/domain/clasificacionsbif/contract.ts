@@ -1,7 +1,7 @@
-import { ClasificacionSbifDTO } from "./model";
+import { ClasificacionSbif } from "../../infrastructure/repository/entity/clasificacionsbif";
 
-export interface ClasificacionSbifServices {
+export interface  ClasificacionSbifServices {
 
-    getClasificacionSbif(): Promise<ClasificacionSbifDTO>;
+    getClasificacionSbif(): Promise<ClasificacionSbif[]>;
 
 }

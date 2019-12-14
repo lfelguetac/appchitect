@@ -1,32 +1,28 @@
 import { EntityRepository, getRepository } from "typeorm";
-import { Moneda } from "./entity";
-import { MonedaDTO } from "../../../domain/moneda/model";
+import { Moneda } from "../entity/moneda";
 
 @EntityRepository(Moneda)
 export class MonedaRepository{
-     
-    monedaDto: MonedaDTO;
-    constructor(){
-        this.monedaDto = new MonedaDTO();
-    }
 
-
-    async traeMonedas(): Promise<MonedaDTO> {
+    async traeMonedas(): Promise<Moneda[]> {
         
         try {
             const resultado: Moneda[] =  await getRepository(Moneda).createQueryBuilder("M")
                 .select( ["M.CODIGO", "M.DESCRIPCION"] )
                 .getRawMany();
 
-            this.monedaDto.result = typeof(resultado) === 'undefined'? null : resultado;
+            if (typeof(resultado) === 'undefined') throw new Error("La consulta no retorno ningún resultado");
+            
+            return resultado;
+
         } catch (err) {
-            this.monedaDto.error = err.message;
+            throw new Error(`INFRASTRUCTURE: ${err.message}`);
         }
-        return this.monedaDto;
+        
     }
 
 
-    async getMonedaById(monedaId: number): Promise<MonedaDTO> {
+    async getMonedaById(monedaId: number): Promise<Moneda|null> {
 
         try {
             const resultado: Moneda =  await getRepository(Moneda).createQueryBuilder("M")
@@ -34,12 +30,12 @@ export class MonedaRepository{
                 .where("M.CODIGO = :codigo", { codigo: monedaId })
                 .getRawOne();
 
-            this.monedaDto.result = typeof(resultado) === 'undefined'? null : resultado;
+            return typeof(resultado) === 'undefined'? null : resultado;
 
         } catch (err) {  
-            this.monedaDto.error = err.message;
+            throw new Error(err.message);
         }
-        return this.monedaDto;
+        
     }
 
  

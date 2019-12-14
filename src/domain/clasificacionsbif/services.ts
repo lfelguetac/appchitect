@@ -1,18 +1,23 @@
 import { ClasificacionSbifServices } from "./contract";
-import { ClasificacionSbifDTO } from "./model";
-import { ClasificacionSbifRepository } from "../../infrastructure/repository/clasificacionsbif/repository";
+import { ClasificacionSbifRepository } from "../../infrastructure/repository/store/clasificacionsbif";
+import { ClasificacionSbif } from "../../infrastructure/repository/entity/clasificacionsbif";
 
 export class ClasificacionSbifDomain implements ClasificacionSbifServices {
 
-    repoClasificacionSbif: ClasificacionSbifRepository;
+    private repoClasificacionSbif: ClasificacionSbifRepository;
     constructor(){
         this.repoClasificacionSbif = new ClasificacionSbifRepository();
     }
 
-    async getClasificacionSbif(): Promise<ClasificacionSbifDTO> {
+    async getClasificacionSbif(): Promise<ClasificacionSbif[]> {
+        try {
+            const clasificacionsbifDto: ClasificacionSbif[] = await  this.repoClasificacionSbif.getClasificacionSbif();
+            
+            return clasificacionsbifDto;            
+        } catch (error) {
+            throw new Error(error.message)
+        }
 
-        const clasificacionsbifDto: ClasificacionSbifDTO = await  this.repoClasificacionSbif.getClasificacionSbif();
-        return clasificacionsbifDto;
 
     }
     

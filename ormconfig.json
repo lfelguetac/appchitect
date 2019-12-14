@@ -6,5 +6,5 @@
     "password": "SGT",
     "database": "trebolfscert",
     "connectString" : "(DESCRIPTION =(ADDRESS = (PROTOCOL=TCP)(HOST=10.10.241.59)(PORT=1521))(CONNECT_DATA =(SID=trebolfscert)))",
-    "entities": ["dist/src/infrastructure/repository/*/entity.js"]
+    "entities": ["dist/src/infrastructure/repository/entity/*.js"]
 }

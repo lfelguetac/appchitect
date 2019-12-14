@@ -5,7 +5,7 @@ import http = require("http");
 import helmet = require('helmet');
 import bodyParser = require('body-parser');
 import swaggerUi = require('swagger-ui-express');
-import swaggerDocument = require('../api/common/contract.json');
+import swaggerDocument = require('../api/common/docs.json');
 import application =  require("./config/api");
 
 const app = express();
@@ -30,13 +30,13 @@ export class ServerExpress {
         
     }
   
-    routesHandler(routes) { 
+    routesHandler( routes ) { 
         app.use(routes);
         return this; 
     } 
     
 
-    listen(port = process.env.PORT) {
+    listen( port ) {
         const API_BASE = application.api.base + application.api.name;
         http.createServer(app).listen(port);
         console.log(`${API_BASE} escuchando en puerto ${port}`);

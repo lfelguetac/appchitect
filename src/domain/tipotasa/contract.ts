@@ -1,7 +1,7 @@
-import { TipoTasaDTO } from "./model";
+import { TipoTasa } from "../../infrastructure/repository/entity/tipotasa";
 
 export interface TipotasaService{
 
-    getTipoTasa(): Promise<TipoTasaDTO>;
+    getTipoTasa(): Promise<TipoTasa[]>;
 
 }

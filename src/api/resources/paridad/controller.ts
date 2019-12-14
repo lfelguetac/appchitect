@@ -10,28 +10,31 @@ export class RestController{
     constructor(){}
     
     static getParidadMoneda = async (req: Request, res: Response) => {
-    
+        const paridadDto = new ParidadDTO();
         try {
             if (!esNumero(req.params.id)) throw new Error("Parametro id no puede ser string");
             const paridadDomain = new ParidadDomain();
             const monedaId = parseInt(req.params.idMoneda);
-            const paridad: ParidadDTO = await paridadDomain.getParidadMoneda(monedaId);
-            res.status(HttpStatusCode.OK).send(paridad);
+            paridadDto.result =  await paridadDomain.getParidadMoneda(monedaId);
+            res.status(HttpStatusCode.OK).send(paridadDto);
             
         } catch (error) {
-            res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).send(errorFormated(error));  
+            paridadDto.error = error.message;
+            res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).send(paridadDto);  
         }
     }
       
     
     static getParidad = async(req: Request, res: Response) => {
+        const paridadDto = new ParidadDTO();
         try {
             const paridadDomain = new ParidadDomain();
-            const paridad: ParidadDTO = await paridadDomain.getListaParidades();
-            res.status(HttpStatusCode.OK).send(paridad);
-            
+            paridadDto.result = await paridadDomain.getListaParidades();
+
+            res.status(HttpStatusCode.OK).send(paridadDto);
         } catch (error) {
-            res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).send(errorFormated(error));  
+            paridadDto.error = error.message;
+            res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).send(paridadDto);  
         }
     
     }

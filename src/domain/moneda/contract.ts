@@ -1,9 +1,9 @@
-import { MonedaDTO } from "./model";
+import { Moneda } from "../../infrastructure/repository/entity/moneda";
 
 export interface MonedaServices {
 
-    getListaMonedas(): Promise<MonedaDTO>;
+    getListaMonedas(): Promise<Moneda[]>;
 
-    getMonedaById(monedaId: number): Promise<MonedaDTO>;
+    getMonedaById(monedaId: number): Promise<Moneda>;
 
 }

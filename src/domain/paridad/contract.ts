@@ -1,9 +1,9 @@
-import { ParidadDTO } from "./model";
+import { Paridad } from "../../infrastructure/repository/entity/paridad";
 
 export interface ParidadServices {
 
-    getParidadMoneda(monedaId : number): Promise<ParidadDTO>
+    getParidadMoneda(monedaId : number): Promise<Paridad>
 
-    getListaParidades(): Promise<ParidadDTO>;
+    getListaParidades(): Promise<Paridad[]>;
 
 }

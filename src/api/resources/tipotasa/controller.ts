@@ -1,19 +1,23 @@
 import { Response, Request } from "express";
 import { HttpStatusCode } from "../../common/constants";
-import { errorFormated } from "../../common/utils";
 import { TipotasaDomain } from "../../../domain/tipotasa/services";
+import { TipoTasaDTO } from "../../../domain/tipotasa/model";
 
 export class RestController{
     
     constructor(){ }
     
     static getTipoTasa = async(req: Request, res: Response) => {
+
+        const tipotasaDto = new TipoTasaDTO();
         try {
             const tipotasaDomain = new TipotasaDomain();
-            const listadoTipoTasa = await tipotasaDomain.getTipoTasa();
-            res.status(HttpStatusCode.OK).send(listadoTipoTasa);
+            tipotasaDto.result = await tipotasaDomain.getTipoTasa();
+
+            res.status(HttpStatusCode.OK).send(tipotasaDto);
         } catch (error) {
-            res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).send(errorFormated(error));             
+            tipotasaDto.error = error.message;
+            res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).send(tipotasaDto);             
         }
         
     }

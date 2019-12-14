@@ -1,4 +1,4 @@
-import { TipoTasa } from "../../infrastructure/repository/tipotasa/entity";
+import { TipoTasa } from "../../infrastructure/repository/entity/tipotasa";
 
 export class TipoTasaDTO {
     result: TipoTasa[] | TipoTasa;

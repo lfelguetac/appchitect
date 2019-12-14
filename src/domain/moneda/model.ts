@@ -1,4 +1,4 @@
-import { Moneda } from "../../infrastructure/repository/moneda/entity";
+import { Moneda } from "../../infrastructure/repository/entity/moneda";
 
 export class MonedaDTO {
     result: Moneda[] | Moneda;
