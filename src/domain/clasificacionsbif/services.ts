@@ -1,21 +1,23 @@
-import { ClasificacionSbifServices } from "./contract";
-import { ClasificacionSbifRepository } from "../../infrastructure/repository/store/clasificacionsbif";
+
+import { ClasificacionSbifContract } from "./contract";
+import { ClasificacionSbifRepository } from "../../infrastructure/repository/persistence/clasificacionsbif";
 import { ClasificacionSbif } from "../../infrastructure/repository/entity/clasificacionsbif";
+import { ClasificacionSbifRepoContract } from "../../infrastructure/repository/interfaces/clasificacionsbif";
 
-export class ClasificacionSbifDomain implements ClasificacionSbifServices {
+export class ClasificacionSbifServices implements ClasificacionSbifContract {
 
-    private repoClasificacionSbif: ClasificacionSbifRepository;
-    constructor(){
-        this.repoClasificacionSbif = new ClasificacionSbifRepository();
+    private repoClasificacionSbif: ClasificacionSbifRepoContract;
+    constructor(repoClasificacionSbifImpl: ClasificacionSbifRepoContract = new ClasificacionSbifRepository){
+        this.repoClasificacionSbif = repoClasificacionSbifImpl;
     }
 
-    async getClasificacionSbif(): Promise<ClasificacionSbif[]> {
+    async obtenerClasificacionSbif(): Promise<ClasificacionSbif[]> {
         try {
             const clasificacionsbifDto: ClasificacionSbif[] = await  this.repoClasificacionSbif.getClasificacionSbif();
             
             return clasificacionsbifDto;            
         } catch (error) {
-            throw new Error(error.message)
+            throw new Error(error.message);
         }
 
 

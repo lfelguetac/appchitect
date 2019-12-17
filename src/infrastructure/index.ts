@@ -1,6 +1,6 @@
 import "./config/env";
 import { ServerExpress as Server } from './server';
-import rutas = require('../api/router');
+import rutas = require('../application/router');
 
 export function Run() {
     new Server()

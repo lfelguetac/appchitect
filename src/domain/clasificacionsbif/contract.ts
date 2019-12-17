@@ -1,7 +1,7 @@
 import { ClasificacionSbif } from "../../infrastructure/repository/entity/clasificacionsbif";
 
-export interface  ClasificacionSbifServices {
+export interface  ClasificacionSbifContract {
 
-    getClasificacionSbif(): Promise<ClasificacionSbif[]>;
+    obtenerClasificacionSbif(): Promise<ClasificacionSbif[]>;
 
 }

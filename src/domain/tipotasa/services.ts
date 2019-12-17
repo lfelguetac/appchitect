@@ -1,13 +1,19 @@
-import { TipotasaService } from "./contract";
+import { TipotasaContract } from "./contract";
 import { TipoTasa } from "../../infrastructure/repository/entity/tipotasa";
-import { TipoTasaRepository } from "../../infrastructure/repository/store/tipotasa";
+import { TipoTasaRepository } from "../../infrastructure/repository/persistence/tipotasa";
+import { TipotasaRepoContract } from "../../infrastructure/repository/interfaces/tipotasa";
 
-export class TipotasaDomain implements TipotasaService {
+export class TipotasaServices implements TipotasaContract {
     
-    async getTipoTasa(): Promise<TipoTasa[]> {
+    private tipotasaRepo: TipotasaRepoContract;
+    constructor(tipotasaRepoImpl: TipotasaRepoContract = new TipoTasaRepository){ 
+        this.tipotasaRepo = tipotasaRepoImpl; 
+    }
+    
+    async obtenerTipoTasa(): Promise<TipoTasa[]> {
         try {
-            const repoTipotasa = new TipoTasaRepository();
-            const tipotasas: TipoTasa[] = await repoTipotasa.getTipoTasa();
+            
+            const tipotasas: TipoTasa[] = await this.tipotasaRepo.getTipoTasa();
             
             return tipotasas;
             

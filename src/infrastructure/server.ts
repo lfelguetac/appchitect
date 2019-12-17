@@ -1,29 +1,29 @@
 import "reflect-metadata";
 import { createConnection } from "typeorm";
+import { runDocuSwagger } from "./middleware/apidoc";
 import express = require('express');
 import http = require("http");
 import helmet = require('helmet');
 import bodyParser = require('body-parser');
-import swaggerUi = require('swagger-ui-express');
-import swaggerDocument = require('../api/common/docs.json');
 import application =  require("./config/api");
+import logger = require("./config/logger");
 
 const app = express();
 const Router = express.Router();
 
 export class ServerExpress {
     
-    constructor(){
+    constructor () {
  
         app.use( helmet() );
         app.use( bodyParser.json() );
-        app.use( (req, res, next) => {
-            console.log(`CATCHED! ${req.method}:${req.path} at ${Date.now()}`);
+        app.use( (req, _res, next) => {
+            logger.info(`${req.method}:${req.path}`);
             next();
         });
 
         //swagger UI para ver docu
-        app.use( '/apidoc', swaggerUi.serve, swaggerUi.setup(swaggerDocument) );
+        runDocuSwagger(app);
 
         //crea una sola conexion global para TypeOrm
         createConnection();
@@ -39,7 +39,7 @@ export class ServerExpress {
     listen( port ) {
         const API_BASE = application.api.base + application.api.name;
         http.createServer(app).listen(port);
-        console.log(`${API_BASE} escuchando en puerto ${port}`);
+        logger.info(`${API_BASE} escuchando en puerto ${port}`);
         return app;
     } 
 

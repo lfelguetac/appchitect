@@ -1,27 +1,28 @@
-import { MonedaServices } from "./contract";
-import { MonedaRepository } from "../../infrastructure/repository/store/moneda";
+import { MonedaContract } from "./contract";
+import { MonedaRepository } from "../../infrastructure/repository/persistence/moneda";
 import { Moneda } from "../../infrastructure/repository/entity/moneda";
+import { MonedaRepoContract } from "../../infrastructure/repository/interfaces/moneda";
 
-export class MonedaDomain implements MonedaServices{
+export class MonedaServices implements MonedaContract{
     
-    private monedaRepository: MonedaRepository;
-    constructor(){
-        this.monedaRepository = new MonedaRepository();
+    private monedaRepository: MonedaRepoContract
+    constructor(monedaRepoImpl: MonedaRepoContract = new MonedaRepository){ 
+        this.monedaRepository = monedaRepoImpl;
     }
 
-    async getListaMonedas(): Promise<Moneda[]> {
+    async obtenerListaDeMonedas(): Promise<Moneda[]> {
         try {
             const monedas: Moneda[] = await this.monedaRepository.traeMonedas();
-            // if (monedas.length  > 1) throw new Error("DOMAIN: No puede retornar mas de una moneda")
-            return monedas
+            // if (monedas.length  > 1) throw new Error('No puede retornar mas de una moneda');
+            return monedas;
         } catch (error) {
-            throw new Error(error.message);  
+            throw new Error(error.message);
         }
-        
-    }    
+ 
+    }
     
     
-    async getMonedaById(monedaId: number): Promise<Moneda> {
+    async obtenerMonedaEspecifica(monedaId: number): Promise<Moneda> {
 
         try {
             return await this.monedaRepository.getMonedaById(monedaId);    

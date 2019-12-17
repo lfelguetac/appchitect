@@ -1,15 +1,17 @@
-import { ParidadServices } from "./contract";
-import { ParidadRepository } from "../../infrastructure/repository/store/paridad";
+import { ParidadContract } from "./contract";
+import { ParidadRepository } from "../../infrastructure/repository/persistence/paridad";
 import { Paridad } from "../../infrastructure/repository/entity/paridad";
+import { ParidadRepoContract } from "../../infrastructure/repository/interfaces/paridad";
 
-export class ParidadDomain implements ParidadServices {
+export class ParidadServices implements ParidadContract {
 
-    private repoParidad: ParidadRepository;
-    constructor(){
-        this.repoParidad = new ParidadRepository();
+    private repoParidad: ParidadRepoContract;
+
+    constructor(paridadRepoImpl: ParidadRepoContract = new ParidadRepository){
+        this.repoParidad = paridadRepoImpl;
     }
 
-    async getParidadMoneda(monedaId: number): Promise<Paridad> {
+    async obtenerParidadMoneda(monedaId: number): Promise<Paridad> {
         try {
             const paridad: Paridad = await this.repoParidad.getParidadMoneda(monedaId);
             return paridad;            
@@ -19,7 +21,7 @@ export class ParidadDomain implements ParidadServices {
 
     }    
     
-    async getListaParidades(): Promise<Paridad[]> {
+    async obtenerListaDeParidades(): Promise<Paridad[]> {
         try {
             const paridad: Paridad[] = await this.repoParidad.getListaParidades();
             return paridad;

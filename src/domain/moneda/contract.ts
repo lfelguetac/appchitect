@@ -1,9 +1,9 @@
 import { Moneda } from "../../infrastructure/repository/entity/moneda";
 
-export interface MonedaServices {
+export interface MonedaContract {
 
-    getListaMonedas(): Promise<Moneda[]>;
+    obtenerListaDeMonedas(): Promise<Moneda[]>;
 
-    getMonedaById(monedaId: number): Promise<Moneda>;
+    obtenerMonedaEspecifica(monedaId: number): Promise<Moneda>;
 
 }

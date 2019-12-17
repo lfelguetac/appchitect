@@ -1,7 +1,7 @@
 import { TipoTasa } from "../../infrastructure/repository/entity/tipotasa";
 
-export interface TipotasaService{
+export interface TipotasaContract{
 
-    getTipoTasa(): Promise<TipoTasa[]>;
+    obtenerTipoTasa(): Promise<TipoTasa[]>;
 
 }
