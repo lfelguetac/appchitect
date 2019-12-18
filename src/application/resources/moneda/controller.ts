@@ -1,6 +1,6 @@
-import { esNumero, TrebolError } from "../../common/utils";
+import { esNumero, TrebolError, keysToLowerCase } from "../../common/utils";
 import { MonedaServices } from "../../../domain/moneda/services";
-import { HttpStatusCode, AppTypeError } from "../../common/constants";
+import { HttpStatusCode, AppTypeError, PARAMETER_NO_NUMBER } from "../../common/constants";
 import { MonedaDTO } from "../../../domain/moneda/model";
 import { MonedaRepositoryMock } from "../../../infrastructure/repository/persistence/moneda.mock";
 import { MonedaContract } from "../../../domain/moneda/contract";
@@ -15,13 +15,16 @@ export class RestController {
     
     // una implementacion distinta
     // this.monedaServices = new MonedaServices(new MonedaRepositoryMock);
+
   }
 
   getMonedas = async (_req, res) => {
 
     const monedaDto = new MonedaDTO();
     try {
-      monedaDto.result = await this.monedaServices.obtenerListaDeMonedas();
+      
+      const jsonOracle = await this.monedaServices.obtenerListaDeMonedas();
+      monedaDto.result = keysToLowerCase(jsonOracle);
       res.status(HttpStatusCode.OK).send(monedaDto);
 
     } catch (e) {
@@ -37,9 +40,10 @@ export class RestController {
 
     const monedaDto = new MonedaDTO();
     try {
-      if (!esNumero(req.params.id)) throw new TrebolError('Parametro id no puede ser string', AppTypeError.APPLICATION);
+      if (!esNumero(req.params.id)) throw new Error(PARAMETER_NO_NUMBER);
       const monedaId = parseInt(req.params.id);
-      monedaDto.result = await this.monedaServices.obtenerMonedaEspecifica(monedaId);
+      const jsonOracle = await this.monedaServices.obtenerMonedaEspecifica(monedaId);
+      monedaDto.result = keysToLowerCase(jsonOracle);
       res.status(HttpStatusCode.OK).send(monedaDto);
     } catch ( e ) {
       monedaDto.error = e.message;      

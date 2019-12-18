@@ -1,6 +1,7 @@
 import { getRepository, EntityRepository } from "typeorm";
 import { Paridad } from "../entity/paridad";
 import { ParidadRepoContract } from "../interfaces/paridad";
+import { NO_DATA_RETURN } from "../../../application/common/constants";
 
 @EntityRepository(Paridad)
 export class ParidadRepository implements ParidadRepoContract {
@@ -12,6 +13,8 @@ export class ParidadRepository implements ParidadRepoContract {
                 .where("P.CODIGOMONEDA = :id", { id: monedaId })
                 .getRawOne();
 
+            if (typeof(resultado) === 'undefined') throw new Error (NO_DATA_RETURN);
+            
             return resultado;         
         } catch (err) {
             throw new Error(err.message);

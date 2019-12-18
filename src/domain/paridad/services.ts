@@ -14,12 +14,13 @@ export class ParidadServices implements ParidadContract {
     async obtenerParidadMoneda(monedaId: number): Promise<Paridad> {
         try {
             const paridad: Paridad = await this.repoParidad.getParidadMoneda(monedaId);
+
             return paridad;            
         } catch (error) {
             throw new Error(error.message);    
         }
 
-    }    
+    }
     
     async obtenerListaDeParidades(): Promise<Paridad[]> {
         try {

@@ -14,7 +14,7 @@ export class ClasificacionSbifRepository implements ClasificacionSbifRepoContrac
 
             return resultado;
         } catch (err) {
-            throw new Error(err.message)
+            throw new Error(err.message);
         }
 
     }

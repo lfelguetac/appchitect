@@ -1,9 +1,9 @@
-import { Response, Request } from "express";
 import { HttpStatusCode } from "../../common/constants";
 import { TipotasaServices } from "../../../domain/tipotasa/services";
 import { TipoTasaDTO } from "../../../domain/tipotasa/model";
 import { TipotasaContract } from "../../../domain/tipotasa/contract";
 import logger = require("../../../infrastructure/config/logger");
+import { keysToLowerCase } from "../../common/utils";
 
 export class RestController{
     
@@ -12,12 +12,12 @@ export class RestController{
         this.tipotasaServices = new TipotasaServices();
     }
     
-    getTipoTasa = async(_req: Request, res: Response) => {
+    getTipoTasa = async(_req, res) => {
 
         const tipotasaDto = new TipoTasaDTO();
         try {
-            tipotasaDto.result = await this.tipotasaServices.obtenerTipoTasa();
-
+            const oracleJson  = await this.tipotasaServices.obtenerTipoTasa();
+            tipotasaDto.result = keysToLowerCase(oracleJson);
             res.status(HttpStatusCode.OK).send(tipotasaDto);
         } catch (error) {
             tipotasaDto.error = error.message;

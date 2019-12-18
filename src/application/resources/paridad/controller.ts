@@ -1,6 +1,5 @@
-import { Response, Request } from "express";
-import { esNumero } from "../../common/utils";
-import { HttpStatusCode } from "../../common/constants";
+import { esNumero, keysToLowerCase } from "../../common/utils";
+import { HttpStatusCode, PARAMETER_NO_NUMBER } from "../../common/constants";
 import { ParidadServices } from "../../../domain/paridad/services";
 import { ParidadDTO } from "../../../domain/paridad/model";
 import { ParidadContract } from "../../../domain/paridad/contract";
@@ -14,12 +13,12 @@ export class RestController{
         this.paridadServices = new ParidadServices();
     }
     
-    getParidad = async(_req: Request, res: Response) => {
+    getParidad = async(_req, res) => {
         const paridadDto = new ParidadDTO();
         try {
             
-            paridadDto.result = await this.paridadServices.obtenerListaDeParidades();
-
+            const jsonOracle = await this.paridadServices.obtenerListaDeParidades();
+            paridadDto.result = keysToLowerCase(jsonOracle);
             res.status(HttpStatusCode.OK).send(paridadDto);
         } catch (error) {
             paridadDto.error = error.message;
@@ -29,12 +28,14 @@ export class RestController{
     
     }
     
-    getParidadMoneda = async (req: Request, res: Response) => {
+    getParidadMoneda = async (req, res) => {
         const paridadDto = new ParidadDTO();
         try {
-            if (!esNumero(req.params.id)) throw new Error("Parametro id no puede ser string");
+
+            if (!esNumero(req.params.idMoneda)) throw new Error(PARAMETER_NO_NUMBER);
             const monedaId = parseInt(req.params.idMoneda);
-            paridadDto.result =  await this.paridadServices.obtenerParidadMoneda(monedaId);
+            const oraceJson  =  await this.paridadServices.obtenerParidadMoneda(monedaId);
+            paridadDto.result = keysToLowerCase(oraceJson);
             res.status(HttpStatusCode.OK).send(paridadDto);
             
         } catch (error) {
@@ -44,6 +45,5 @@ export class RestController{
         }
     }
       
-
 
 }

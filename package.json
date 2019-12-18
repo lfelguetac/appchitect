@@ -5,10 +5,11 @@
   "main": "index.js",
   "scripts": {
     "start": "concurrently \"tsc --watch\" \"nodemon ./dist/index.js\"",
+    "predocker": "docker build -t ms-parametricas .",
     "reinstall": "rm -rf node_modules && rm -rf package-lock.json && npm cache clean --force && npm install",
     "pretest": "jest --coverage",
     "test": "jest",
-    "posttestt": "eslint --ignore-path .gitignore server/api/**"
+    "posttest": "eslint --ignore-path .gitignore server/api/**"
   },
   "private": true,
   "author": "LFE",

@@ -5,16 +5,20 @@ import { TipotasaServices } from "../../../domain/tipotasa/services";
 import { ClasificacionSbifServices } from "../../../domain/clasificacionsbif/services";
 import { ProdutoAggregate } from "./model";
 import { HttpStatusCode } from "../../common/constants";
+import { MonedaContract } from "../../../domain/moneda/contract";
+import { ParidadContract } from "../../../domain/paridad/contract";
+import { TipotasaContract } from "../../../domain/tipotasa/contract";
+import { ClasificacionSbifContract } from "../../../domain/clasificacionsbif/contract";
 
 
 export class RestController {
     
     static async getProductoAggregate(_req: Request, res: Response) {
         
-        const monedaServices = new MonedaServices();
-        const paridadServices = new ParidadServices();
-        const tipotasaServices = new TipotasaServices();
-        const clasificacionDomain = new ClasificacionSbifServices();
+        const monedaServices: MonedaContract = new MonedaServices();
+        const paridadServices: ParidadContract = new ParidadServices();
+        const tipotasaServices: TipotasaContract = new TipotasaServices();
+        const clasificacionDomain: ClasificacionSbifContract = new ClasificacionSbifServices();
         
         const produtoAggDto: ProdutoAggregate = new ProdutoAggregate();
         try {

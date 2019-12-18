@@ -1,8 +1,8 @@
-import { Response, Request } from "express";
 import { HttpStatusCode } from "../../common/constants";
 import { ClasificacionSbifServices } from "../../../domain/clasificacionsbif/services";
 import { ClasificacionSbifDTO } from "../../../domain/clasificacionsbif/model";
 import { ClasificacionSbifContract } from "../../../domain/clasificacionsbif/contract";
+import { keysToLowerCase } from "../../common/utils";
 
 export class RestController {
 
@@ -11,12 +11,11 @@ export class RestController {
         this.clasificacionSbifServices = new ClasificacionSbifServices();
     }
 
-
-    getClasificacionSbif = async (_req: Request, res: Response) => {
+    getClasificacionSbif = async (_req, res) => {
         const clasificacionDto = new ClasificacionSbifDTO(); 
         try {
-            clasificacionDto.result = await this.clasificacionSbifServices.obtenerClasificacionSbif();
-
+            const jsonOracle = await this.clasificacionSbifServices.obtenerClasificacionSbif();
+            clasificacionDto.result = keysToLowerCase(jsonOracle);
             res.status( HttpStatusCode.OK ).send( clasificacionDto );
         } catch (error) {
             clasificacionDto.error = error.message;

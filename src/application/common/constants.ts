@@ -37,7 +37,6 @@ export enum HttpStatusCode {
     BAD_REQUEST = 400,  
 
 
-
     /**
      * Es necesario autenticar para obtener la respuesta solicitada. Esta es similar a 403, pero en este caso, autenticación es posible.
      */
@@ -117,3 +116,7 @@ export enum HttpStatusCode {
     GATEWAY_TIMEOUT = 504
 
 }
+
+//errores comunes
+export const NO_DATA_RETURN = 'La consulta no ha retornado ningún resultado';
+export const PARAMETER_NO_NUMBER = 'Parametro enviado debe ser numerico.';

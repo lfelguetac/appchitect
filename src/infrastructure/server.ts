@@ -12,9 +12,9 @@ const app = express();
 const Router = express.Router();
 
 export class ServerExpress {
-    
+
     constructor () {
- 
+
         app.use( helmet() );
         app.use( bodyParser.json() );
         app.use( (req, _res, next) => {
@@ -27,14 +27,14 @@ export class ServerExpress {
 
         //crea una sola conexion global para TypeOrm
         createConnection();
-        
+
     }
-  
+
     routesHandler( routes ) { 
         app.use(routes);
         return this; 
     } 
-    
+
 
     listen( port ) {
         const API_BASE = application.api.base + application.api.name;
