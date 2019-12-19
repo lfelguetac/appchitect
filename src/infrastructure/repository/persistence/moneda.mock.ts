@@ -13,6 +13,7 @@ export class MonedaRepositoryMock implements MonedaRepoContract {
     }
 
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     async getMonedaById(monedaId: number): Promise<Moneda> {
 
         const mock: Moneda = {};

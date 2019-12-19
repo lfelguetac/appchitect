@@ -29,16 +29,16 @@ pipeline{
                 }
             }
         }
-        
+   
         stage ('test'){
             steps{
                  gitlabCommitStatus(name: 'test') {
                     echo 'running tests...'
-                    sh 'npm run coverage'
+                    sh 'npm run test:coverage'
                  }
             }
         }
-        
+
         stage ('build') {
             steps{
                  gitlabCommitStatus(name: 'build') {
@@ -81,8 +81,10 @@ pipeline{
                  }
                     
             }
+            
         }
         stage ('Deploy') {
+
           when {
                 branch 'trebol/develop'
             }
@@ -95,6 +97,7 @@ pipeline{
                         kubectl set image deployment/${pkgName} ${pkgName}-container=${dockerImageDeploy}
                     '''
                   }
+
             }
         }
     }

@@ -6,6 +6,9 @@ export class ClasificacionSbif{
     @PrimaryColumn()
     codigo?: number;
 
+
+    
+
     @Column()
     descripcion?: string;
 }

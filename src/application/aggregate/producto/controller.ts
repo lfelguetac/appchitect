@@ -9,6 +9,7 @@ import { MonedaContract } from "../../../domain/moneda/contract";
 import { ParidadContract } from "../../../domain/paridad/contract";
 import { TipotasaContract } from "../../../domain/tipotasa/contract";
 import { ClasificacionSbifContract } from "../../../domain/clasificacionsbif/contract";
+import { keysToLowerCase } from "../../common/utils";
 
 
 export class RestController {
@@ -29,10 +30,10 @@ export class RestController {
                                                 clasificacionDomain.obtenerClasificacionSbif() 
                                             ]);
             
-            produtoAggDto.moneda = dataRow[0];
-            produtoAggDto.paridad = dataRow[1];
-            produtoAggDto.tipotasa = dataRow[2];
-            produtoAggDto.clasificacionsbif = dataRow[3];
+            produtoAggDto.moneda = keysToLowerCase(dataRow[0]);
+            produtoAggDto.paridad = keysToLowerCase(dataRow[1]);
+            produtoAggDto.tipotasa = keysToLowerCase(dataRow[2]);
+            produtoAggDto.clasificacionsbif = keysToLowerCase(dataRow[3]);
 
             res.status(HttpStatusCode.OK).send(produtoAggDto);
 

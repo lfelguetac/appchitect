@@ -18,7 +18,7 @@ export class TipotasaServices implements TipotasaContract {
             return tipotasas;
             
         } catch (error) {
-            throw new Error(error.message)
+            throw new Error(error.message);
         }
 
     }

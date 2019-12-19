@@ -1,10 +1,10 @@
 {
     "type": "oracle",
-    "host": "10.10.241.59",
+    "host": "200.0.0.94",
     "port": 1521,
-    "username": "sgt",
+    "username": "SGT",
     "password": "SGT",
-    "database": "trebolfscert",
-    "connectString" : "(DESCRIPTION =(ADDRESS = (PROTOCOL=TCP)(HOST=10.10.241.59)(PORT=1521))(CONNECT_DATA =(SID=trebolfscert)))",
+    "database": "desa",
+    "connectString" : "(DESCRIPTION =(ADDRESS = (PROTOCOL=TCP)(HOST=200.0.0.94)(PORT=1521))(CONNECT_DATA =(SID=desa)))",
     "entities": ["dist/src/infrastructure/repository/entity/*.js"]
 }
