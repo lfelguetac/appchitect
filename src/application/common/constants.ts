@@ -4,8 +4,8 @@ export enum AppTypeError {
   INFRASTRUCTURE = 'INFRA'
 }
 
-export enum HttpStatusCode {
-
+export enum CodigoHttp {
+  
     // Ver más.. https://developer.mozilla.org/es/docs/Web/HTTP/Status
 
     /**

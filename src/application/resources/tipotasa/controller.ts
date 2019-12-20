@@ -1,4 +1,4 @@
-import { HttpStatusCode } from "../../common/constants";
+import { CodigoHttp } from "../../common/constants";
 import { TipotasaServices } from "../../../domain/tipotasa/services";
 import { TipoTasaDTO } from "../../../domain/tipotasa/model";
 import { TipotasaContract } from "../../../domain/tipotasa/contract";
@@ -18,11 +18,11 @@ export class RestController{
         try {
             const oracleJson  = await this.tipotasaServices.obtenerTipoTasa();
             tipotasaDto.result = keysToLowerCase(oracleJson);
-            res.status(HttpStatusCode.OK).send(tipotasaDto);
+            res.status(CodigoHttp.OK).send(tipotasaDto);
         } catch (error) {
             tipotasaDto.error = error.message;
             logger.error(error.message);
-            res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).send(tipotasaDto);             
+            res.status(CodigoHttp.INTERNAL_SERVER_ERROR).send(tipotasaDto);             
         }
         
     }

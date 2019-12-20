@@ -4,7 +4,7 @@ import { ParidadServices } from "../../../domain/paridad/services";
 import { TipotasaServices } from "../../../domain/tipotasa/services";
 import { ClasificacionSbifServices } from "../../../domain/clasificacionsbif/services";
 import { ProdutoAggregate } from "./model";
-import { HttpStatusCode } from "../../common/constants";
+import { CodigoHttp } from "../../common/constants";
 import { MonedaContract } from "../../../domain/moneda/contract";
 import { ParidadContract } from "../../../domain/paridad/contract";
 import { TipotasaContract } from "../../../domain/tipotasa/contract";
@@ -35,11 +35,11 @@ export class RestController {
             produtoAggDto.tipotasa = keysToLowerCase(dataRow[2]);
             produtoAggDto.clasificacionsbif = keysToLowerCase(dataRow[3]);
 
-            res.status(HttpStatusCode.OK).send(produtoAggDto);
+            res.status(CodigoHttp.OK).send(produtoAggDto);
 
         } catch (error) {
             produtoAggDto.error = error.message;
-            res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).send(produtoAggDto);
+            res.status(CodigoHttp.INTERNAL_SERVER_ERROR).send(produtoAggDto);
         }
 
     }

@@ -1,6 +1,6 @@
 import { esNumero, keysToLowerCase } from "../../common/utils";
 import { MonedaServices } from "../../../domain/moneda/services";
-import { HttpStatusCode, PARAMETER_NO_NUMBER } from "../../common/constants";
+import { CodigoHttp, PARAMETER_NO_NUMBER } from "../../common/constants";
 import { MonedaDTO } from "../../../domain/moneda/model";
 import { MonedaContract } from "../../../domain/moneda/contract";
 import logger = require("../../../infrastructure/config/logger");
@@ -26,12 +26,12 @@ export class RestController {
       
       const jsonOracle = await this.monedaServices.obtenerListaDeMonedas();
       monedaDto.result = keysToLowerCase(jsonOracle);
-      res.status(HttpStatusCode.OK).send(monedaDto);
+      res.status(CodigoHttp.OK).send(monedaDto);
 
     } catch (e) {
       monedaDto.error = e.message;      
       logger.error(e.message);
-      res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).send(monedaDto);
+      res.status(CodigoHttp.INTERNAL_SERVER_ERROR).send(monedaDto);
     }
 
   }
@@ -45,11 +45,11 @@ export class RestController {
       const monedaId = parseInt(req.params.id);
       const jsonOracle = await this.monedaServices.obtenerMonedaEspecifica(monedaId);
       monedaDto.result = keysToLowerCase(jsonOracle);
-      res.status(HttpStatusCode.OK).send(monedaDto);
+      res.status(CodigoHttp.OK).send(monedaDto);
     } catch ( e ) {
       monedaDto.error = e.message;      
       logger.error(e.message);
-      res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).send(monedaDto);
+      res.status(CodigoHttp.INTERNAL_SERVER_ERROR).send(monedaDto);
     }
     
   }

@@ -1,4 +1,4 @@
-import { HttpStatusCode } from "../../common/constants";
+import { CodigoHttp } from "../../common/constants";
 import { ClasificacionSbifServices } from "../../../domain/clasificacionsbif/services";
 import { ClasificacionSbifDTO } from "../../../domain/clasificacionsbif/model";
 import { ClasificacionSbifContract } from "../../../domain/clasificacionsbif/contract";
@@ -16,10 +16,10 @@ export class RestController {
         try {
             const jsonOracle = await this.clasificacionSbifServices.obtenerClasificacionSbif();
             clasificacionDto.result = keysToLowerCase(jsonOracle);
-            res.status( HttpStatusCode.OK ).send( clasificacionDto );
+            res.status( CodigoHttp.OK ).send( clasificacionDto );
         } catch (error) {
             clasificacionDto.error = error.message;
-            res.status( HttpStatusCode.INTERNAL_SERVER_ERROR ).send(clasificacionDto);
+            res.status( CodigoHttp.INTERNAL_SERVER_ERROR ).send(clasificacionDto);
         }
     }
     

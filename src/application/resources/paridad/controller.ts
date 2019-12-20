@@ -1,5 +1,5 @@
 import { esNumero, keysToLowerCase } from "../../common/utils";
-import { HttpStatusCode, PARAMETER_NO_NUMBER } from "../../common/constants";
+import { CodigoHttp, PARAMETER_NO_NUMBER } from "../../common/constants";
 import { ParidadServices } from "../../../domain/paridad/services";
 import { ParidadDTO } from "../../../domain/paridad/model";
 import { ParidadContract } from "../../../domain/paridad/contract";
@@ -19,11 +19,11 @@ export class RestController{
             
             const jsonOracle = await this.paridadServices.obtenerListaDeParidades();
             paridadDto.result = keysToLowerCase(jsonOracle);
-            res.status(HttpStatusCode.OK).send(paridadDto);
+            res.status(CodigoHttp.OK).send(paridadDto);
         } catch (error) {
             paridadDto.error = error.message;
             logger.error(error.message);
-            res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).send(paridadDto);  
+            res.status(CodigoHttp.INTERNAL_SERVER_ERROR).send(paridadDto);  
         }
     
     }
@@ -36,12 +36,12 @@ export class RestController{
             const monedaId = parseInt(req.params.idMoneda);
             const oraceJson  =  await this.paridadServices.obtenerParidadMoneda(monedaId);
             paridadDto.result = keysToLowerCase(oraceJson);
-            res.status(HttpStatusCode.OK).send(paridadDto);
+            res.status(CodigoHttp.OK).send(paridadDto);
             
         } catch (error) {
             paridadDto.error = error.message;
             logger.error(error.message);
-            res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).send(paridadDto);  
+            res.status(CodigoHttp.INTERNAL_SERVER_ERROR).send(paridadDto);  
         }
     }
       
