@@ -6,10 +6,10 @@
   "scripts": {
     "start": "concurrently \"tsc --watch\" \"nodemon dist/index.js\"",
     "start:dev": "concurrently \"tsc --watch\" \"nodemon dist/index.js\"",
-    "start:prod": "npm run build && npm start",
+    "start:prod": "npm run build && pm2-runtime start dist/index.js",
     "build": "tsc",
-    "predocker": "docker build -t ms-parametricas .",
-    "docker": "docker run --env-file .env -p 3000:3000 ms-parametricas",
+    "predocker": "npm run build && docker build -t ms-parametricas .",
+    "docker": "docker run --env-file=.env -p 4000:3000 ms-parametricas",
     "reinstall": "rm -rf node_modules && rm -rf package-lock.json && npm cache clean --force && npm install",
     "test:coverage": "jest --forceExit --coverage --verbose",
     "posttest": "eslint src/**"
@@ -48,7 +48,6 @@
     "eslint": "^6.6.0",
     "jest": "^24.9.0",
     "nodemon": "^2.0.1",
-    "standardx": "^5.0.0",
     "ts-jest": "^24.2.0"
   }
 }

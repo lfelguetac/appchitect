@@ -6,5 +6,5 @@
     "password": "SGT",
     "database": "desa",
     "connectString" : "(DESCRIPTION =(ADDRESS = (PROTOCOL=TCP)(HOST=200.0.0.94)(PORT=1521))(CONNECT_DATA =(SID=desa)))",
-    "entities": ["dist/src/infrastructure/repository/entity/*.js"]
+    "entities": ["src/infrastructure/repository/entity/*.js"]
 }

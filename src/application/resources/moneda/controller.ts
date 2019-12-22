@@ -4,7 +4,6 @@ import { CodigoHttp, PARAMETER_NO_NUMBER } from "../../common/constants";
 import { MonedaDTO } from "../../../domain/moneda/model";
 import { MonedaContract } from "../../../domain/moneda/contract";
 import logger = require("../../../infrastructure/config/logger");
-// import { MonedaRepositoryMock } from "../../../infrastructure/repository/persistence/moneda.mock";
 
 
 export class RestController {
@@ -13,17 +12,15 @@ export class RestController {
   constructor(){ 
 
     this.monedaServices = new MonedaServices();
-    
     // una implementacion distinta
     // this.monedaServices = new MonedaServices(new MonedaRepositoryMock);
-
   }
 
   getMonedas = async (_req, res) => {
 
     const monedaDto = new MonedaDTO();
     try {
-      
+
       const jsonOracle = await this.monedaServices.obtenerListaDeMonedas();
       monedaDto.result = keysToLowerCase(jsonOracle);
       res.status(CodigoHttp.OK).send(monedaDto);
@@ -56,3 +53,4 @@ export class RestController {
 
 
 }
+

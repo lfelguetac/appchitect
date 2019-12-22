@@ -25,7 +25,7 @@ pipeline{
         stage ('install modules'){
             steps{
                 gitlabCommitStatus(name: 'install modules') {
-                     sh 'npm install'
+                     sh 'npm install --production'
                 }
             }
         }
