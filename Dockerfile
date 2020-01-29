@@ -16,7 +16,7 @@ ENV OCI_VERSION=12
 
 RUN echo '/opt/oracle/instantclient/' | tee -a /etc/ld.so.conf.d/oracle_instant_client.conf && ldconfig
 
-
+   
 WORKDIR /dist
 COPY package*.json ./
 RUN npm install pm2 -g
