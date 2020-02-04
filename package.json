@@ -1,20 +1,18 @@
 {
-  "name": "ms-parametricas",
-  "version": "0.1.0",
-  "description": "Parametricas de datos.",
+  "name": "apitype",
+  "version": "0.2.0",
+  "description": "Prototipo base para aplicaciones n-capas",
   "main": "index.js",
   "scripts": {
     "start": "concurrently \"tsc --watch\" \"nodemon dist/index.js\"",
-    "start:dev": "concurrently \"tsc --watch\" \"nodemon dist/index.js\"",
     "start:prod": "npm run build && pm2-runtime start dist/index.js",
     "build": "tsc",
     "predocker": "npm run build && docker build -t ms-parametricas .",
     "docker": "docker run --env-file=.env -p 4000:3000 ms-parametricas",
     "reinstall": "rm -rf node_modules && rm -rf package-lock.json && npm cache clean --force && npm install",
-    "test:coverage": "jest --forceExit --coverage --verbose",
+    "test": "jest --coverage ",
     "posttest": "eslint src/**"
   },
-  "private": true,
   "author": "LFE",
   "license": "UNLICENSED",
   "dependencies": {

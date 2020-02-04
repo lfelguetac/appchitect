@@ -1,16 +1,16 @@
 import { EntityRepository, getRepository } from "typeorm";
-import { Moneda } from "../entity/moneda";
-import { MonedaRepoContract } from "../interfaces/moneda";
+import { Flor } from "../entity/flor.entity";
+import { FlorInterfaz } from "../interfaces/flor.interfaz";
 import { NO_DATA_RETURN } from "../../../application/common/constants";
 
 
-@EntityRepository(Moneda)
-export class MonedaRepository implements MonedaRepoContract {
+@EntityRepository(Flor)
+export class FlorRepository implements FlorInterfaz {
 
-    async traeMonedas(): Promise<Moneda[]> {
+    async getFlores(): Promise<Flor[]> {
 
         try {
-            const resultado: Moneda[] =  await getRepository(Moneda).createQueryBuilder("M")
+            const resultado: Flor[] =  await getRepository(Flor).createQueryBuilder("M")
                 .select( ["M.CODIGO", "M.DESCRIPCION", "M.SIMBOLO", "M.DECIMALES"] )
                 .getRawMany();
 
@@ -23,10 +23,10 @@ export class MonedaRepository implements MonedaRepoContract {
     }
 
 
-    async getMonedaById(monedaId: number): Promise<Moneda> {
+    async getFlorById(monedaId: number): Promise<Flor> {
 
         try {
-            const resultado: Moneda =  await getRepository(Moneda).createQueryBuilder("M")
+            const resultado: Flor =  await getRepository(Flor).createQueryBuilder("M")
                 .select( ["M.CODIGO", "M.DESCRIPCION"] )
                 .where("M.CODIGO = :codigo", { codigo: monedaId })
                 .getRawOne();
