@@ -2,22 +2,14 @@
 import { router } from '../infrastructure/server';
 
 import application =  require("../infrastructure/config/api");
-import clasificacionsbif = require('./resources/clasificacionsbif/routes');
-import moneda = require('./resources/moneda/routes');
-import paridad = require('./resources/paridad/routes') ;
-import estadoproducto = require('./resources/estadoproducto/routes');
-import tipotasa = require('./resources/tipotasa/routes');
-import productoAgg = require('./aggregate/producto/routes');
+import flores = require('./resources/flor/flor.routes');
+
+import florAgg = require('./aggregate/flores/flor.routes.agg');
 
 const API_BASE = application.api.base + application.api.name;
 
-router.use( API_BASE, productoAgg );
-router.use( API_BASE, moneda );
-router.use( API_BASE, paridad ); 
-router.use( API_BASE, clasificacionsbif );
-router.use( API_BASE, estadoproducto );
-router.use( API_BASE, tipotasa );
-
+router.use( API_BASE, florAgg );
+router.use( API_BASE, flores );
 
 
 export = router;
