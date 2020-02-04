@@ -1,5 +1,5 @@
 import { esNumero, keysToLowerCase } from "../../common/utils";
-import { MonedaServices } from "../../../domain/flor/flor.services";
+import { FlorServices } from "../../../domain/flor/flor.services";
 import { CodigoHttp, PARAMETER_NO_NUMBER } from "../../common/constants";
 import { FlorDTO } from "../../../domain/flor/flor.model";
 import { FlorContract } from "../../../domain/flor/flor.contract";
@@ -8,7 +8,7 @@ import logger = require("../../../infrastructure/config/logger");
 export class FlorController {
 
   private florServices: FlorContract;
-  constructor(){ this.florServices = new MonedaServices(); }
+  constructor(){ this.florServices = new FlorServices(); }
 
 
   getFlores = async (_req, res) => {

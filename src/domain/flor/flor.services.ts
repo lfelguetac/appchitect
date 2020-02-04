@@ -11,10 +11,9 @@ export class FlorServices implements FlorContract{
     async obtenerListaFlores(): Promise<Flor[]> {
         try {
             const flores: Flor[] = await this.florRepository.getFlores();
-            // if (monedas.length  > 1) throw new Error('No puede retornar mas de una moneda');
             return flores;
         } catch (error) {
-            throw new Error(error.message);
+            throw (error.message);
         }
     }
     
@@ -23,7 +22,7 @@ export class FlorServices implements FlorContract{
         try {
             return await this.florRepository.getFlorById(florId);    
         } catch (error) {
-            throw new Error(error.message);
+            throw (error.message);
         }
 
     }

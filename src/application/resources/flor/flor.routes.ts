@@ -1,8 +1,8 @@
 import { router } from '../../../infrastructure/server';
 import { FlorController } from './flor.controller';
 
-router.get('/moneda',  new FlorController().getFlores);
-router.get('/moneda/:id', new FlorController().getFlorById);
+router.get('/flor',  new FlorController().getFlores);
+router.get('/flor/:id', new FlorController().getFlorById);
  
 
 export = router;

@@ -1,31 +1,31 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "Servicio de parametricas",
-    "description": "Este servicio provee parametricas del sistema general de tablas. Para mas info del contenido de este servicio ver mas abajo.",
-    "version": "1.0.0"
+    "title": "Invernadero del rey de las flores",
+    "description": "El rey de las flores tiene sus fabricas dentro de la tierra, cada obrero hace una flor que en primavera creera...",
+    "version": "0.1.0"
   },
   "tags": [
     {
-      "name": "moneda",
+      "name": "flor",
       "description": ""
     }
   ],
   "paths": {
-    "/moneda": {
+    "/flor": {
       "get": {
         "tags": [
-          "moneda"
+          "flor"
         ],
-        "summary": "Recupera un listado de monedas",
-        "operationId": "getMonedas",
+        "summary": "Recupera el listado de flores disponibles y en buen estado",
+        "operationId": "getFlores",
         "responses": {
           "400": {
             "description": "Bad request",
             "content": {}
           },
           "404": {
-            "description": "Moneda not found",
+            "description": "Flor not found",
             "content": {}
           },
           "405": {
@@ -44,18 +44,18 @@
         "x-codegen-request-body-name": "body"
       }
     },
-  "/moneda/{monedaId}": {
+  "/flor/{florId}": {
     "get": {
       "tags": [
-        "moneda"
+        "flor"
       ],
-      "summary": "Obtiene una moneda especifica",
-      "operationId": "getMonedaById",
+      "summary": "Obtiene una flor especifica del invernadero",
+      "operationId": "getFloresById",
       "parameters": [
         {
-          "name": "monedaId",
+          "name": "florId",
           "in": "path",
-          "description": "Identificador de la moneda",
+          "description": "Identificador de la flor",
           "required": true,
           "schema": {
             "type": "string"
@@ -68,17 +68,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/moneda"
+                "$ref": "#/components/schemas/flor"
               }
             }
           }
         },
         "400": {
-          "description": "Invalid moneda supplied",
+          "description": "Invalid flor supplied",
           "content": {}
         },
         "404": {
-          "description": "Moneda not found",
+          "description": "flor not found",
           "content": {}
         }
       }
@@ -87,7 +87,7 @@
   },
   "components": {
     "schemas": {
-      "moneda": {
+      "flor": {
         "type": "object",
         "properties": {
           "codigo": {

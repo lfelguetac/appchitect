@@ -1,9 +1,10 @@
 {
     "type": "postgres",
     "host": "localhost",
-    "port": 1521,
-    "username": "root",
-    "password": "",
-    "database": "test",
-    "entities": ["dist/src/infrastructure/repository/entity/*.js"]
+    "port": 5432,
+    "username": "postgres",
+    "password": "pg01",
+    "database": "pg_prueba",
+    "synchronize": true,
+    "entities": ["dist/src/infrastructure/persistence/entity/*.js"]
 }

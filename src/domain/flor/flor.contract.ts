@@ -4,6 +4,6 @@ export interface FlorContract {
 
     obtenerListaFlores(): Promise<Flor[]>;
 
-    obtenerFlorEspecifica(monedaId: number): Promise<Flor>;
+    obtenerFlorEspecifica(florId: number): Promise<Flor>;
 
 }

@@ -4,9 +4,9 @@ import { createConnection, getConnection } from 'typeorm';
 import { Flor } from '../src/infrastructure/persistence/entity/flor.entity';
 
 
-describe("probamos recurso moneda", () => {
+describe("operaciones con flores", () => {
 
-    it ('Valida metodo obtenerMonedaEspecifica() devuelve objeto data - metodo real', async () => {
+    it ('consulta toda la data', async () => {
         await createConnection();
 
         const monedaServices: FlorContract = new FlorServices();
@@ -15,12 +15,11 @@ describe("probamos recurso moneda", () => {
     });
 
 
-    it ('Valida metodo obtenerListaDeMonedas() devuelve un registro - metodo real', async () => {
+    it ('consulta flor especifica', async () => {
         const monedaServices: FlorContract = new FlorServices();
         const listaMonedas: Flor = await monedaServices.obtenerFlorEspecifica(999);
-        expect(Array.isArray(listaMonedas)).toBe(false);
+        expect(listaMonedas).toBeUndefined();
     });
-
 
     it ('verifica que haya una conexion de typeorm activa', async () => {
         expect((getConnection().isConnected)).toBe(true);

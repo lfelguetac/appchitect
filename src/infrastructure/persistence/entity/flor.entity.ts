@@ -1,6 +1,5 @@
-import { Entity, Column, PrimaryColumn } from "typeorm";
-
-@Entity("FLOR")
+import { Column, PrimaryColumn, Entity } from "typeorm";
+@Entity()
 export class Flor {
 
     @PrimaryColumn()
