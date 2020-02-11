@@ -12,13 +12,12 @@ export class FlorRepository implements FlorInterfaz {
             const resultado: Flor[] =  await getRepository(Flor).createQueryBuilder("")
                 .select( ["codigo", "nombre", "aroma", "color", "riego"] )
                 .getRawMany();
-
             return resultado;
 
         } catch (err) {
             throw (err.message);
         }
-        
+
     }
 
 
@@ -29,9 +28,6 @@ export class FlorRepository implements FlorInterfaz {
                 .select( ["codigo", "nombre", "aroma", "color", "riego"] )
                 .where("codigo = :codigo", { codigo: florId })
                 .getRawOne();
-
-            // if (typeof(resultado) === 'undefined') throw new Error (NO_DATA_RETURN);
-            
             return resultado;
                 
         } catch (err) {  
