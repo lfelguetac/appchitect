@@ -15,7 +15,20 @@ export class Flor {
     color?:   number;   
 
     @Column()
-    riego?:   number;   
+    riego?:   number;
+
+    @Column()
+    estado?: Conservacion;
+
+    @Column()
+    precio?: number;
 
 };
 
+
+export enum Conservacion {
+    RADIANTE,
+    SANA,
+    MARCHITA,
+    SECA
+};

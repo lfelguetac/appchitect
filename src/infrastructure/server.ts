@@ -1,6 +1,5 @@
 import "reflect-metadata";
 import { createConnection } from "typeorm";
-import { runDocuSwagger } from "./middleware/apidoc";
 import { securitize } from "./middleware/jwt";
 import express = require('express');
 import http = require("http");
@@ -25,27 +24,14 @@ export class ServerExpress {
             next();
         });  
 
-        //aplica seguridad jwt
-        // app.use( (req, res, next) => {
-        //     verifyToken(req, res, next);
-        // });
-
-        //swagger UI para ver docu
-        runDocuSwagger(app);
-
-        //crea una sola conexion global para TypeOrm
         createConnection();
 
-        //midleware de rutas
         app.use(rutas);
 
-        
-        //runs server
         http.createServer(app).listen(puerto);
         logger.info(`escuchando en puerto ${puerto}`);
 
     }
-
 }
 
 export const router = Router;
