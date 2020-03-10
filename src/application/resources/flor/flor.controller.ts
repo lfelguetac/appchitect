@@ -8,8 +8,7 @@ import { FlorRepository } from "../../../infrastructure/persistence/repository/f
 
 export class FlorController {
 
-  private florServices: FlorContract;
-  constructor(){ this.florServices = new FlorServices(new FlorRepository()); }
+  private florServices: FlorContract = new FlorServices();
 
   getFlorById = async (req, res) => {
     const florDto = new FlorDTO();
@@ -41,10 +40,7 @@ export class FlorController {
     }
 
   }
-   
-
-
-
+  
 
 }
 
