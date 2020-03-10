@@ -5,6 +5,9 @@ import { FlorInterfaz } from "../../infrastructure/persistence/interfaces/flor.i
 
 export class FlorServices implements FlorContract{
     
+    private florRepository: FlorInterfaz
+    constructor(florRepoImpl: FlorInterfaz = new FlorRepository){ this.florRepository = florRepoImpl; }    
+    
     async obtenerFlorEspecifica(florId: number): Promise<Flor> {
         try {
             const florConsultada: Flor = await this.florRepository.getFlorById(florId);
@@ -31,8 +34,5 @@ export class FlorServices implements FlorContract{
         }
     }
     
-    
-    private florRepository: FlorInterfaz
-    constructor(florRepoImpl: FlorInterfaz = new FlorRepository){ this.florRepository = florRepoImpl; }
 
 }
